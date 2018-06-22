@@ -38,32 +38,34 @@ def game_hash
               }
 end
 
-
-
-
 def num_points_scored(player_name)
-  game_hash.each do | team |
-    binding.pry
-    team[:players].find(player_name)[:points]
+  points = game_hash.each do | team, data |
+    puts "player_name = #{player_name}"
+    puts "team = #{team} data[:players] = #{data[:players][:player_name]}"
+    if data[:players].has_key?(player_name)
+      game_hash[team][data][:players][:player_name][:points]
+      break
+    end
   end
+  points
 end
 
 num_points_scored('Jeff Adrien')
 
 
 
-def good_practices
-  game_hash.each do |location, team_data|
-    #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
-    binding.pry
-      team_data.each do |attribute, data|
-        #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
-        binding.pry
-
-        #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
-        data.each do |data_item|
-            binding.pry
-      end
-    end
-  end
-end
+# def good_practices
+#   game_hash.each do |location, team_data|
+#     #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
+#     binding.pry
+#       team_data.each do |attribute, data|
+#         #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
+#         binding.pry
+#
+#         #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
+#         data.each do |data_item|
+#             binding.pry
+#       end
+#     end
+#   end
+# end
