@@ -77,18 +77,14 @@ def player_stats(player_name)
   end
 
 def big_shoe_rebounds
-  shoes = []
+  shoesRebounds = {}
   game_hash.each do | team, data |
     data[:players].each do | player, data |
-      shoes.push({ data[:shoe] => data[:rebounds] })
-
+      shoesRebounds[data[:shoe]] = data[:rebounds]
     end
   end
-  puts shoes
-  puts shoes.map { | element | element.key } max
+  shoesRebounds[shoesRebounds.keys.max]
   end
-  # numbers
-big_shoe_rebounds
 
 # def good_practices
 #   game_hash.each do |location, team_data|
