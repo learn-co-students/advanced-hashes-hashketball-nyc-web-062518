@@ -11,7 +11,7 @@ def game_hash
                   'Reggie Evans':
                       {number: 30, shoe: 14, points: 12, rebounds: 12, assists: 12, steals: 12, blocks: 12, slam_dunks: 7},
                   'Brook Lopez':
-                      {number: 11, shoe: 17, points: 17, rebounds: 19, assists: 10, steals: 3, blocks: 1, slam_dunks: 5},
+                      {number: 11, shoe: 17, points: 17, rebounds: 19, assists: 10, steals: 3, blocks: 1, slam_dunks: 15},
                   'Mason Plumlee':
                       {number: 1, shoe: 19, points: 26, rebounds: 12, assists: 6, steals: 3, blocks: 8, slam_dunks: 5},
                   'Jason Terry':
@@ -45,9 +45,50 @@ end
 
 def shoe_size(player_name)
   relevantTeam = game_hash.keys.find { | team | game_hash[team.to_sym][:players][player_name.to_sym] }
-  game_hash[relevantTeam.to_sym][:players][player_name.to_sym][:shoe_size]
+  game_hash[relevantTeam.to_sym][:players][player_name.to_sym][:shoe]
 end
 
+def team_colors(team_name)
+  relevantTeam = game_hash.keys.find { | team | game_hash[team.to_sym][:team_name] == team_name  }
+  game_hash[relevantTeam.to_sym][:colors]
+end
+
+def team_names
+  teams = []
+  game_hash.each do | team, data |
+    teams.push(data[:team_name])
+  end
+  teams
+end
+
+def player_numbers(team_name)
+  numbers = []
+  relevantTeam = game_hash.keys.find { | team | game_hash[team.to_sym][:team_name] == team_name }
+  game_hash[relevantTeam.to_sym][:players].each do | player, data |
+    numbers.push(data[:number])
+  end
+  numbers
+end
+
+
+def player_stats(player_name)
+    relevantTeam = game_hash.keys.find { | team | game_hash[team.to_sym][:players][player_name.to_sym] }
+    game_hash[relevantTeam.to_sym][:players][player_name.to_sym]
+  end
+
+def big_shoe_rebounds
+  shoes = []
+  game_hash.each do | team, data |
+    data[:players].each do | player, data |
+      shoes.push({ data[:shoe] => data[:rebounds] })
+
+    end
+  end
+  puts shoes
+  puts shoes.map { | element | element.key } max
+  end
+  # numbers
+big_shoe_rebounds
 
 # def good_practices
 #   game_hash.each do |location, team_data|
