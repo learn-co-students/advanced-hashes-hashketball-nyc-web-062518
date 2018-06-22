@@ -6,7 +6,7 @@ def game_hash
                   team_name: 'Brooklyn Nets',
                 colors: ['Black', 'White'],
                 players: {
-                  'Alan Andreson':
+                  'Alan Anderson':
                     {number: 0, shoe: 16, points: 22, rebounds: 12, assists: 12, steals: 3, blocks: 1, slam_dunks: 1},
                   'Reggie Evans':
                       {number: 30, shoe: 14, points: 12, rebounds: 12, assists: 12, steals: 12, blocks: 12, slam_dunks: 7},
@@ -25,7 +25,7 @@ def game_hash
                 players: {
                   'Jeff Adrien':
                     {number: 4, shoe: 18, points: 10, rebounds: 1, assists: 1, steals: 2, blocks: 7, slam_dunks: 2},
-                  'Bismak Miyombo':
+                  'Bismak Biyombo':
                       {number: 0, shoe: 16, points: 12, rebounds: 4, assists: 7, steals: 7, blocks: 15, slam_dunks: 10},
                   'DeSagna Diop':
                       {number: 2, shoe: 14, points: 24, rebounds: 12, assists: 12, steals: 4, blocks: 5, slam_dunks: 5},
@@ -39,18 +39,9 @@ def game_hash
 end
 
 def num_points_scored(player_name)
-  points = game_hash.each do | team, data |
-    puts "player_name = #{player_name}"
-    puts "team = #{team} data[:players] = #{data[:players][:player_name]}"
-    if data[:players].has_key?(player_name)
-      game_hash[team][data][:players][:player_name][:points]
-      break
-    end
-  end
-  points
+  relevantTeam = game_hash.keys.find { | team | game_hash[team.to_sym][:players][player_name.to_sym] }
+  game_hash[relevantTeam.to_sym][:players][player_name.to_sym][:points]
 end
-
-num_points_scored('Jeff Adrien')
 
 
 
