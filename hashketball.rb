@@ -27,26 +27,44 @@ def game_hash
   }
 end
 
-def num_points_scored(player)
-   nets_players = game_hash[:home][:players].keys
-   hornets_players = game_hash[:away][:players].keys
-   if nets_players.include?(player)
-     game_hash[:home][:players][player][:points]
-   elsif hornets_players.include?(player)
-     game_hash[:away][:players][player][:points]
-   else nil
-   end
+# One array containing a hash for each player:
+# player => {all player stats}
+
+def get_all_players
+  array_of_players_hashes = game_hash.values.map do |team|
+    team[:players]
+  end
+  array_of_players_hashes.flatten
 end
 
+# def num_points_scored(player)
+#    nets_players = game_hash[:home][:players].keys
+#    hornets_players = game_hash[:away][:players].keys
+#    if nets_players.include?(player)
+#      game_hash[:home][:players][player][:points]
+#    elsif hornets_players.include?(player)
+#      game_hash[:away][:players][player][:points]
+#    else nil
+#    end
+# end
+
+def num_points_scored(player)
+  player_stats(player)[:points]
+end
+
+# def shoe_size(player)
+#   nets_players = game_hash[:home][:players].keys
+#   hornets_players = game_hash[:away][:players].keys
+#   if nets_players.include?(player)
+#     game_hash[:home][:players][player][:shoe]
+#   elsif hornets_players.include?(player)
+#     game_hash[:away][:players][player][:shoe]
+#   else nil
+#   end
+# end
+
 def shoe_size(player)
-  nets_players = game_hash[:home][:players].keys
-  hornets_players = game_hash[:away][:players].keys
-  if nets_players.include?(player)
-    game_hash[:home][:players][player][:shoe]
-  elsif hornets_players.include?(player)
-    game_hash[:away][:players][player][:shoe]
-  else nil
-  end
+  player_stats(player)[:shoe]
 end
 
 def team_colors(team)
@@ -73,33 +91,87 @@ def player_numbers(team)
   hornets_players = game_hash[:away][:players].keys
   numbers_array = []
   if team == game_hash[:home][:team_name]
-    game_hash[:home][:players].each do |player_name, values|
+    game_hash[:home][:players].each do |player, values|
       numbers_array << values[:number]
     end
   else
-    game_hash[:away][:players].each do |player_name, values|
+    game_hash[:away][:players].each do |player, values|
       numbers_array << values[:number]
     end
   end
   numbers_array
 end
 
+# def player_stats(player)
+#   nets_players = game_hash[:home][:players].keys
+#   hornets_players = game_hash[:away][:players].keys
+#   if nets_players.include?(player)
+#     game_hash[:home][:players][player]
+#   else
+#     game_hash[:away][:players][player]
+#   end
+# end
+
 def player_stats(player)
-  nets_players = game_hash[:home][:players].keys
-  hornets_players = game_hash[:away][:players].keys
-  if nets_players.include?(player)
-    game_hash[:home][:players][player]
-  else
-    game_hash[:away][:players][player]
-  end
+  all_players = game_hash[:home][:players].merge(game_hash[:away][:players])
+  all_players[player]
 end
 
 def big_shoe_rebounds
   nets_players = game_hash[:home][:players]
   hornets_players = game_hash[:away][:players]
   all_players = game_hash[:home][:players].merge(hornets_players)
-  biggest_shoe_player = all_players.max_by do |player_name, values|
+  biggest_shoe_player = all_players.max_by do |player, values|
     values[:shoe]
   end
   return biggest_shoe_player[1][:rebounds]
+end
+
+def most_points_scored
+  all_players = game_hash[:home][:players].merge(game_hash[:away][:players])
+  highest_scorer = all_players.max_by do |player, values|
+    values[:points]
+  end
+  highest_scorer[0]
+end
+
+
+def winning_team
+  nets_points_array = game_hash[:home][:players].map do |player, values|
+    values[:points]
+  end
+  hornets_points_array = game_hash[:away][:players].map do |player, values|
+    values[:points]
+  end
+  nets_total = 0
+  nets_points_array.each do |players_points|
+    nets_total += players_points
+  end
+  hornets_total = 0
+  hornets_points_array.each do |players_points|
+    hornets_total += players_points
+  end
+  if nets_total > hornets_total
+    "Brooklyn Nets"
+  elsif nets_total < hornets_total
+    "Charlotte Hornets"
+  else return "A tie"
+  end
+end
+
+def player_with_longest_name
+  all_player_names = game_hash[:home][:players].merge(game_hash[:away][:players]).keys
+  all_player_names.max_by(&:length)
+end
+
+
+def long_name_steals_a_ton?
+  all_players = game_hash[:home][:players].merge(game_hash[:away][:players])
+  highest_stealer = all_players.max_by do |player, values|
+    values[:steals]
+  end
+  if highest_stealer[0] == player_with_longest_name
+    true
+  else false
+  end
 end
