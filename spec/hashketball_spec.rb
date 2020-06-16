@@ -93,6 +93,7 @@ describe 'hashketball' do
 
     let(:jeff_stats) {
       {
+        :player_name => "Jeff Adrien",
         :number => 4,
         :shoe => 18,
         :points => 10,
@@ -106,6 +107,7 @@ describe 'hashketball' do
 
     let(:bismak_stats) {
       {
+        :player_name => "Bismak Biyombo",
         :number => 0,
         :shoe => 16,
         :points => 12,
@@ -119,6 +121,7 @@ describe 'hashketball' do
 
     let(:desagna_stats) {
       {
+        :player_name => "DeSagna Diop",
         :number => 2,
         :shoe => 14,
         :points => 24,
@@ -132,6 +135,7 @@ describe 'hashketball' do
 
     let(:ben_stats) {
       {
+        :player_name => "Ben Gordon",
         :number => 8,
         :shoe => 15,
         :points => 33,
@@ -145,6 +149,7 @@ describe 'hashketball' do
 
     let(:brendan_stats) {
       {
+        :player_name => "Brendan Haywood",
         :number => 33,
         :shoe => 15,
         :points => 6,
@@ -158,6 +163,7 @@ describe 'hashketball' do
 
     let(:alan_stats) {
       {
+        :player_name => "Alan Anderson",
         :number => 0,
         :shoe => 16,
         :points => 22,
@@ -171,6 +177,7 @@ describe 'hashketball' do
 
     let(:reggie_stats) {
       {
+        :player_name => "Reggie Evans",
         :number => 30,
         :shoe => 14,
         :points => 12,
@@ -184,6 +191,7 @@ describe 'hashketball' do
 
     let(:brook_stats) {
       {
+        :player_name => "Brook Lopez",
         :number => 11,
         :shoe => 17,
         :points => 17,
@@ -197,6 +205,7 @@ describe 'hashketball' do
 
     let(:mason_stats) {
       {
+        :player_name => "Mason Plumlee",
         :number => 1,
         :shoe => 19,
         :points => 26,
@@ -210,6 +219,7 @@ describe 'hashketball' do
 
     let(:jason_stats) {
       {
+        :player_name => "Jason Terry",
         :number => 31,
         :shoe => 15,
         :points => 19,
@@ -248,42 +258,42 @@ end
 
 # If you'd like to work on the bonus, uncomment these tests.
 
-# describe 'bonus' do
+ describe 'bonus' do
 
-#   describe '#most_points_scored' do
+   describe '#most_points_scored' do
 
-#     it 'returns Ben Gordon' do
-#       expect(most_points_scored).to eq("Ben Gordon")
-#     end
+     it 'returns Ben Gordon' do
+       expect(most_points_scored).to eq("Ben Gordon")
+     end
 
-#   end
+   end
 
-#   describe '#winning_team' do
+   describe '#winning_team' do
 
-#     it 'returns the Brooklyn Nets' do
-#       expect(winning_team).to eq("Brooklyn Nets")
-#     end
+     it 'returns the Brooklyn Nets' do
+       expect(winning_team).to eq("Brooklyn Nets")
+     end
 
-#   end
+   end
 
-#   describe '#player_with_longest_name' do
+   describe '#player_with_longest_name' do
 
-#     it 'returns Brendan Haywood' do
-#       expect(player_with_longest_name).to eq("Brendan Haywood")
-#     end
+     it 'returns Brendan Haywood' do
+       expect(player_with_longest_name).to eq("Brendan Haywood")
+     end
 
-#   end
+   end
 
-# end
+ end
 
-# describe 'super bonus' do
+ describe 'super bonus' do
 
-#   describe '#long_name_steals_a_ton?' do
+   describe '#long_name_steals_a_ton?' do
 
-#     it 'returns true' do
-#       expect(long_name_steals_a_ton?).to eq(true)
-#     end
+     it 'returns true' do
+       expect(long_name_steals_a_ton?).to eq(true)
+     end
 
-#   end
+   end
 
-# end
+ end
